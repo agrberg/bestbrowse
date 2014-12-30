@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+
+  "name": "bestbrowse",
+  "description": "records browsing behavior",
+  "version": "1.0",
+  "background": "background.html",
+
+  "permissions": [
+    "history"
+  ]
+}
