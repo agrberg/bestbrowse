@@ -6,6 +6,7 @@
     %th Title
     %th Last Visit
     %th Visit Count
+    %th User
 
   - @visits.each do |visit|
     %tr
@@ -13,3 +14,4 @@
       %td= visit.title
       %td= visit.visit_at.to_formatted_s(:long)
       %td= visit.visit_count
+      %td #{visit.email} on #{visit.browser_type}:#{visit.browser_id}
