@@ -15,7 +15,7 @@ def getTimeDifferences(email):
     """
     curtime = int(math.ceil(time.time()))
     db = sqlite3.Connection(dbpath)
-    url_times = [(str(url), int(access_time)) for url, access_time in db.execute("SELECT url, strftime('%s', visit_at) FROM visits") if url is not None]
+    url_times = [(str(url), int(access_time)) for url, access_time in db.execute("SELECT base_url, strftime('%s', visit_at) FROM visits") if url is not None]
     time_dict = {}
     for url, _ in url_times:
         time_dict[url] = (url, [])
