@@ -25,7 +25,7 @@ class UserBrowsingHistory(object):
         self.fillInRelatedPagesHash()
 
     def getVisitedURLsAndTimes(self):
-        return utils.getTimeDifferences()
+        return utils.getTimeDifferences(self.userEmail)
 
     def getVisitedURLCounts(self):
         self.visitedURLDomains = set()
@@ -35,7 +35,7 @@ class UserBrowsingHistory(object):
 
     def fillInRelatedPagesHash(self):
         self.recsHash = {}
-        for visitedURLCount in self.visitedURLCounts[:5]:
+        for visitedURLCount in self.visitedURLCounts[:10]:
             self.addRelatedURLtoHash(visitedURLCount)
 
     def addRelatedURLtoHash(self, visitedURL):
@@ -66,7 +66,7 @@ class UserBrowsingHistory(object):
     def getRecommendation(self,k=1):
         k = min(k,len(self.recsHash.keys()))
         sortedKeys = heapq.nlargest(k, self.recsHash, key=self.recsHash.get)
-        return sortedKeys[0]
+        return sortedKeys[0:3]
         #return max(self.recsHash.iteritems(), key=(lambda (key, value): value))[0]
 
 
