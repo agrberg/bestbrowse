@@ -36,12 +36,12 @@ def getTimeDifferences(browser_id=None):
 
 
 def getRedirect(url):
-    # req = urllib2.Request(url)
-    # res = urllib2.urlopen(req)
-    # redirect_url = res.geturl()
-    # return tld.get_tld(redirect_url)
-    r = requests.head(url)
-    return tld.get_tld(r.headers['location'])
+    req = urllib2.Request(url)
+    res = urllib2.urlopen(req)
+    redirect_url = res.geturl()
+    return tld.get_tld(redirect_url)
+    # r = requests.head(url)
+    # return tld.get_tld(r.headers['location'])
 
 
 # For testing

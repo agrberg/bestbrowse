@@ -51,12 +51,6 @@ class UserBrowsingHistory(object):
 ##                   #print "filtered2 " + urlRedirectName
 ##                   continue
 
-##            urlRedirectName = utils.getRedirect(urlName)
-##            if urlRedirectName != urlName:
-##               if any(urlCount.urlString == urlRedirectName for urlCount in self.visitedURLCounts):
-##                   #print "filtered2 " + urlRedirectName
-##                   continue
-            
             #if parse_domain(urlName,2).split('.', 1)[0] in self.visitedURLDomains:
                 #print "filtered2 "+urlName
                 #continue
