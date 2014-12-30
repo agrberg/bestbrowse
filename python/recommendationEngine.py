@@ -11,7 +11,6 @@ ToDos:
 1) Filter output list, such as  the super-popular websites
 2) Add explanation for why we're suggesting it
 3) Make flexible number of recommendations
-4) Adjust for seconds
 """
 
 DISCOUNT_EXPONENT = 0.9
@@ -66,7 +65,7 @@ class UserBrowsingHistory(object):
     def getRecommendation(self,k=1):
         k = min(k,len(self.recsHash.keys()))
         sortedKeys = heapq.nlargest(5, self.recsHash, key=self.recsHash.get)
-        return [getRedirect(x) for key in sortedKeys[0:5] if getRedirect(x) is not None]
+        return [utils.getRedirect(x) for key in sortedKeys[0:5] if utils.getRedirect(x) is not None]
         #return sortedKeys[0:5]
         #return max(self.recsHash.iteritems(), key=(lambda (key, value): value))[0]
 
