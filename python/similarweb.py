@@ -1,8 +1,8 @@
 import urllib2
 import json
-from memoization import memoized
+from memoization import persistently_memoized
 
-SIMILARWEB_USER_KEY = "6620c0e7665cecb8e98a97edbbdbb04b"
+SIMILARWEB_USER_KEY = "a57e330331bad92cf4745e3c0dc234c2"
 SIMILARWEB_URL_FORMAT = "http://api.similarweb.com/Site/{domain}/v2/alsovisited?Format={format}&UserKey={key}"
 SIMILARWEB_RESPONSE_TOP_KEY = u"AlsoVisited"
 SIMILARWEB_RESPONSE_URL_KEY = u"Url"
@@ -15,7 +15,7 @@ class WebsiteCorrelation(object):
     def __repr__(self):
         return "{0}({1!r}, {2!r})".format(type(self).__name__, self.url, self.score) 
 
-@memoized
+@persistently_memoized
 def get_correlated_websites(domain):
     similarweb_url = SIMILARWEB_URL_FORMAT.format(domain=domain, format="JSON", key=SIMILARWEB_USER_KEY)
     try:
