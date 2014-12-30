@@ -45,11 +45,12 @@ class UserBrowsingHistory(object):
             if any(urlCount.urlString == urlName for urlCount in self.visitedURLCounts):
                 print "filtered1 "+urlName
                 continue
-            urlRedirectName = utils.getRedirect(urlName)
-            if urlRedirectName != urlName:
-               if any(urlCount.urlString == urlRedirectName for urlCount in self.visitedURLCounts):
-                   print "filtered2 " + urlRedirectName
-                   continue
+##            urlRedirectName = utils.getRedirect(urlName)
+##            if urlRedirectName != urlName:
+##               if any(urlCount.urlString == urlRedirectName for urlCount in self.visitedURLCounts):
+##                   print "filtered2 " + urlRedirectName
+##                   continue
+            
             #if parse_domain(urlName,2).split('.', 1)[0] in self.visitedURLDomains:
                 #print "filtered2 "+urlName
                 #continue
@@ -90,13 +91,13 @@ class URLCount(object):
         return timeDiff + 1
 
     def getRelatedWebsites(self):
-        return [("google.com",.2),("mit.edu",.12),("arkiv.org",.1)]
-        #webCorrelations = similarweb.get_correlated_websites(self.urlString)
-        #return [(str(correlation[0]), correlation[1]) for correlation in webCorrelations]
+        #return [("google.com",.2),("mit.edu",.12),("arkiv.org",.1)]
+        webCorrelations = similarweb.get_correlated_websites(self.urlString)
+        return [(str(correlation[0]), correlation[1]) for correlation in webCorrelations]
 
 def main():
     browser_id = sys.argv[1]
-    print UserBrowingHistory(browser_id).getRecommendation()
+    print UserBrowsingHistory(browser_id).getRecommendation()
 
 if __name__ == '__main__':
     main()

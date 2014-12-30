@@ -1,9 +1,8 @@
 chrome.notifications.onClicked.addListener(function(notificationId) {
   chrome.notifications.clear(notificationId, function(success){});
-
-  chrome.tabs.create({ url: lastRecommendation }, function(tab){});
-
-  console.log('notification click listener', arguments);
+  chrome.tabs.create({ url: lastRecommendation }, function(tab){
+    lastTabId = tab.id
+  });
 });
 
 var recNoteId = '',
@@ -15,16 +14,20 @@ var recNoteId = '',
       isClickable: true
     },
     reqListener,
-    lastRecommendation;
+    lastRecommendation,
+	notFromRedairection = true,
+	lastTabId,
+	tab;
 
 reqListener = function() {
   if (this.responseText != '') {
     lastRecommendation = this.responseText;
-
     chrome.notifications.clear(recNoteId, function(){});
-    chrome.notifications.create(recNoteId, opt, function(notificationId) {
-      recNoteId = notificationId;
+	if (notFromRedairection){
+      chrome.notifications.create(recNoteId, opt, function(notificationId) {
+        recNoteId = notificationId;
     });
+	}
   }
 }
 
@@ -32,7 +35,13 @@ chrome.history.onVisited.addListener(function(result) {
 	var reqToSend = new XMLHttpRequest(),
 	    reqToGet = new XMLHttpRequest(),
 	    fd = new FormData();
-
+	chrome.tabs.onActivated.addListener(function(activeInfo) {
+      tab = activeInfo.tabId;
+	});
+	if (tab == lastTabId)
+	{
+	  return;
+	}
 	fd.append('url', result.url);
 	fd.append('visit_at', result.lastVisitTime);
 	fd.append('title', result.title);
