@@ -45,21 +45,18 @@ class UserBrowsingHistory(object):
             if any(urlCount.urlString == urlName for urlCount in self.visitedURLCounts):
                 #print "filtered1 "+urlName
                 continue
-<<<<<<< Updated upstream
             urlRedirectName = utils.getRedirect('http://' + urlName)
             if urlRedirectName != urlName:
                if any(urlCount.urlString == urlRedirectName for urlCount in self.visitedURLCounts):
                    #print "filtered2 " + urlRedirectName
                    continue
 
-=======
 ##            urlRedirectName = utils.getRedirect(urlName)
 ##            if urlRedirectName != urlName:
 ##               if any(urlCount.urlString == urlRedirectName for urlCount in self.visitedURLCounts):
 ##                   #print "filtered2 " + urlRedirectName
 ##                   continue
             
->>>>>>> Stashed changes
             #if parse_domain(urlName,2).split('.', 1)[0] in self.visitedURLDomains:
                 #print "filtered2 "+urlName
                 #continue
