@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20141230112403) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "visits", force: true do |t|
     t.string   "url"
     t.datetime "visit_at"
@@ -28,9 +25,9 @@ ActiveRecord::Schema.define(version: 20141230112403) do
     t.string   "browser_id"
   end
 
-  add_index "visits", ["browser_type", "browser_id"], name: "index_visits_on_browser_type_and_browser_id", using: :btree
-  add_index "visits", ["email"], name: "index_visits_on_email", using: :btree
-  add_index "visits", ["url"], name: "index_visits_on_url", using: :btree
-  add_index "visits", ["visit_at"], name: "index_visits_on_visit_at", using: :btree
+  add_index "visits", ["browser_type", "browser_id"], name: "index_visits_on_browser_type_and_browser_id"
+  add_index "visits", ["email"], name: "index_visits_on_email"
+  add_index "visits", ["url"], name: "index_visits_on_url"
+  add_index "visits", ["visit_at"], name: "index_visits_on_visit_at"
 
 end
