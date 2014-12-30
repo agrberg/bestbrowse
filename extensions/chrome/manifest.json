@@ -10,11 +10,9 @@
 
   "permissions": [
     "history",
-    "http://10.104.92.195/",
   	"identity",
-	"notifications",
-	"https://prchecker-innovalist.netdna-ssl.com/",
-	"http://www.mojotech.com/",
-	"https://www.google.co.il/"
+  	"notifications",
+    "http://10.104.92.195/",
+  	"https://www.google.co.il/"
   ]
 }
