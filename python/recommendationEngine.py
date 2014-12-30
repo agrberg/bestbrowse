@@ -2,6 +2,7 @@ import math
 import similarweb
 import operator
 import utils
+import sys
 
 """
 ToDos:
@@ -77,4 +78,9 @@ class URLCount(object):
         return [(str(correlation.url), correlation.score) for correlation in webCorrelations]
 
 
-    
+def main():
+    browser_id = sys.argv[1]
+    print UserBrowingHistory(browser_id).getRecommendation()
+
+if __name__ == '__main__':
+    main()
