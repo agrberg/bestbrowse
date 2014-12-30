@@ -65,7 +65,7 @@ class UserBrowsingHistory(object):
     def getRecommendation(self,k=1):
         k = min(k,len(self.recsHash.keys()))
         sortedKeys = heapq.nlargest(5, self.recsHash, key=self.recsHash.get)
-        return [utils.getRedirect(key) for key in sortedKeys[0:5] if utils.getRedirect(key) is not None]
+        return [utils.getRedirect("http://"+key) for key in sortedKeys[0:5] if utils.getRedirect("http://"+key) is not None]
         #return sortedKeys[0:5]
         #return max(self.recsHash.iteritems(), key=(lambda (key, value): value))[0]
 
