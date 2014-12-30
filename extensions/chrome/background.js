@@ -1,10 +1,3 @@
-<html>
-<head>
-<script>
 chrome.history.onVisited.addListener(function(result) {
-    // alert("This is an alert");
     console.log("This is a console log");
 }); 
-</script>
-</head>
-</html

@@ -4,7 +4,9 @@
   "name": "bestbrowse",
   "description": "records browsing behavior",
   "version": "1.0",
-  "background": "background.html",
+  "background": {
+      "scripts": ["background.js"]
+  },
 
   "permissions": [
     "history"
