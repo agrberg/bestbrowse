@@ -1,0 +1,15 @@
+%h1 Recorded Visits
+
+%table
+  %tr
+    %th URL
+    %th Title
+    %th Last Visit
+    %th Visit Count
+
+  - @visits.each do |visit|
+    %tr
+      %td= visit.base_url
+      %td= visit.title
+      %td= visit.visit_at.to_formatted_s(:long)
+      %td= visit.visit_count
