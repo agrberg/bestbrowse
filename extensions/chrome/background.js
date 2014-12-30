@@ -1,31 +1,37 @@
-var reqListener = function() {
-  if (this.responseText != '') {
+chrome.notifications.onClicked.addListener(function(notificationId) {
+  chrome.notifications.clear(notificationId, function(success){});
+
+  chrome.tabs.create({ url: lastRecommendation }, function(tab){});
+
+  console.log('notification click listener', arguments);
+});
+
+var recNoteId = '',
     opt = {
+      type: 'basic',
       iconUrl: 'icon.jpg',
-      type: 'list',
       title: 'A wild recommendation has appeared!',
-      message: 'Primary message to display',
-      priority: 1,
-      items: [{ title: 'Check out your recco', message: ''}]
-    };
+      message: 'You got a recommendation. Click me brah!',
+      isClickable: true
+    },
+    reqListener,
+    lastRecommendation;
 
-    chrome.notifications.create('notify1', opt, function(id) {});
-    chrome.notifications.onClicked.addListener(function(notification){
-      var properties = {
-        url: this.responseText
-      };
-      chrome.tabs.create(properties, function(tab) {});
+reqListener = function() {
+  if (this.responseText != '') {
+    lastRecommendation = this.responseText;
+
+    chrome.notifications.clear(recNoteId, function(){});
+    chrome.notifications.create(recNoteId, opt, function(notificationId) {
+      recNoteId = notificationId;
     });
-
-    console.log(this.responseText);
   }
 }
 
 chrome.history.onVisited.addListener(function(result) {
 	var reqToSend = new XMLHttpRequest(),
 	    reqToGet = new XMLHttpRequest(),
-	    fd = new FormData(),
-      opt = {};
+	    fd = new FormData();
 
 	fd.append('url', result.url);
 	fd.append('visit_at', result.lastVisitTime);
