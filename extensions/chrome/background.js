@@ -1,8 +1,13 @@
 chrome.notifications.onClicked.addListener(function(notificationId) {
   chrome.notifications.clear(notificationId, function(success){});
+
   chrome.tabs.create({ url: lastRecommendation }, function(tab){
-    lastTabId = tab.id
+    recommendedTabId = tab.id
   });
+});
+
+chrome.tabs.onActivated.addListener(function(activeInfo) {
+  currentTabId = activeInfo.tabId;
 });
 
 var recNoteId = '',
@@ -15,33 +20,32 @@ var recNoteId = '',
     },
     reqListener,
     lastRecommendation,
-	notFromRedairection = true,
-	lastTabId,
-	tab;
+    recommendedTabId,
+	  currentTabId;
 
 reqListener = function() {
+  var recommendation;
+
   if (this.responseText != '') {
-    lastRecommendation = this.responseText;
+    recommendation = JSON.parse(this.responseText)[0];
+
+    lastRecommendation = /^http/.test(recommendation) ? recommendation : 'http://' + recommendation
     chrome.notifications.clear(recNoteId, function(){});
-	if (notFromRedairection){
-      chrome.notifications.create(recNoteId, opt, function(notificationId) {
-        recNoteId = notificationId;
+
+    chrome.notifications.create(recNoteId, opt, function(notificationId) {
+      recNoteId = notificationId;
     });
-	}
   }
 }
 
 chrome.history.onVisited.addListener(function(result) {
 	var reqToSend = new XMLHttpRequest(),
-	    reqToGet = new XMLHttpRequest(),
 	    fd = new FormData();
-	chrome.tabs.onActivated.addListener(function(activeInfo) {
-      tab = activeInfo.tabId;
-	});
-	if (tab == lastTabId)
-	{
+
+	if (currentTabId === recommendedTabId) {
 	  return;
-	}
+  }
+
 	fd.append('url', result.url);
 	fd.append('visit_at', result.lastVisitTime);
 	fd.append('title', result.title);
@@ -50,13 +54,11 @@ chrome.history.onVisited.addListener(function(result) {
 	chrome.identity.getProfileUserInfo(function (userInfo) {
 	  fd.append('browser_id', userInfo.id);
 	  fd.append('browser_type', "chrome");
+
+    reqToSend.onload = reqListener;
     reqToSend.open("POST", "http://10.104.92.195:3000/visits", true);
     reqToSend.send(fd);
 	});
-
-	reqToGet.onload = reqListener;
-	reqToGet.open("GET", "http://10.104.92.195:3000/recommendation", true);
-  reqToGet.send();
 });
 
 chrome.runtime.onInstalled.addListener(function(details) {

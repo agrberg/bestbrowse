@@ -4,7 +4,11 @@ class VisitsController < ApplicationController
   end
 
   def create
-    render json: Visit.create(visit_params)
+    Visit.create(visit_params)
+
+    recommendations = `python python/recommendationEngine.py #{params[:browser_id]}`
+    recommendations.chomp!.gsub!(/'/, '"')
+    render json: recommendations
   end
 
   private def visit_params
