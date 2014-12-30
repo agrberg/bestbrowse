@@ -8,7 +8,10 @@ dbpath = os.path.expanduser('~/Dropbox/ITC_db/best_browse_dev.sqlite3')
 
 def getTimeDifferences(email):
     """
-    [("google.com", [1, 5, 9]), (...), ...]
+    Returns a list of tuples. Each tuple is of the form (url, time_list), where
+    time_list is a list of integers. For each integer i in the list, we know
+    that the url was accessed i seconds ago.
+    For example: [('google.com', [1, 4, 6]), ('bing.com', [100])]
     """
     curtime = int(math.ceil(time.time()))
     db = sqlite3.Connection(dbpath)
