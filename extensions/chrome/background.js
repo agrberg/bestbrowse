@@ -1,6 +1,7 @@
 chrome.history.onVisited.addListener(function(result) {
   // Post data to server
 	var req = new XMLHttpRequest();
+	var redirection = new XMLHttpRequest();
 	var fd = new FormData();
 
 	fd.append('url', result.url);
@@ -22,7 +23,16 @@ chrome.history.onVisited.addListener(function(result) {
 	  message: 'Primary message to display',
 	  priority: 1,
 	  items: [{ title: 'for redirection click here', message: ''}]
-};
+	};
 
-chrome.notifications.create('notify1', opt, function(id) { console.log("Last error:", chrome.runtime.lastError); });
+	chrome.notifications.create('notify1', opt, function(id) { console.log("Last error:", chrome.runtime.lastError); });
+
+	chrome.notifications.onClicked.addListener(function (notification){
+	  console.log("bla bla bla");
+	  console.log("Last error:", chrome.runtime.lastError);
+	  var properties = {
+	    url:'https://www.google.co.uk/?gfe_rd=cr&ei=cayiVOOSKdO_-AP21IDADg'
+	  }; 
+	  chrome.tabs.create( properties, function (tab) {});
+	});
 });
