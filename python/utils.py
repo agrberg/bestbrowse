@@ -5,6 +5,7 @@ import math
 import urllib2
 import tld
 import requests
+from memoization import persistently_memoized
 
 dbpath = os.path.expanduser('~/Dropbox/ITC_db/best_browse_dev.sqlite3')
 
@@ -34,7 +35,7 @@ def getTimeDifferences(browser_id=None):
         time_dict[url][1].append(curtime - access_time)
     return time_dict.values()
 
-
+@persistently_memoized
 def getRedirect(url):
     """
     If |url| is a 404, returns None.
