@@ -9,6 +9,7 @@
   },
 
   "permissions": [
-    "history"
+    "history",
+    "http://10.104.92.195/"
   ]
 }
