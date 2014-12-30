@@ -14,7 +14,7 @@ ToDos:
 4) Adjust for seconds
 """
 
-DISCOUNT_EXPONENT = 0.3
+DISCOUNT_EXPONENT = 0.9
 #FORBIDDEN_WEBSITES = ['google','facebook','youtube','yahoo','baidu','qq','twitter','wikipedia','amazon','live','linkedin','sina','ebay','blogspot','bing','wordpress','instagram','PayPal','microsoft']
 
 class UserBrowsingHistory(object):
@@ -45,12 +45,21 @@ class UserBrowsingHistory(object):
             if any(urlCount.urlString == urlName for urlCount in self.visitedURLCounts):
                 #print "filtered1 "+urlName
                 continue
+<<<<<<< Updated upstream
             urlRedirectName = utils.getRedirect('http://' + urlName)
             if urlRedirectName != urlName:
                if any(urlCount.urlString == urlRedirectName for urlCount in self.visitedURLCounts):
                    #print "filtered2 " + urlRedirectName
                    continue
 
+=======
+##            urlRedirectName = utils.getRedirect(urlName)
+##            if urlRedirectName != urlName:
+##               if any(urlCount.urlString == urlRedirectName for urlCount in self.visitedURLCounts):
+##                   #print "filtered2 " + urlRedirectName
+##                   continue
+            
+>>>>>>> Stashed changes
             #if parse_domain(urlName,2).split('.', 1)[0] in self.visitedURLDomains:
                 #print "filtered2 "+urlName
                 #continue
