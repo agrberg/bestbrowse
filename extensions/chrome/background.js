@@ -1,3 +1,6 @@
 chrome.history.onVisited.addListener(function(result) {
-    console.log("This is a console log");
+    console.log("URL:  " + result.url);
+    console.log("Title:  " + result.title);
+    console.log("Last visit time:  " + result.lastVisitTime);
+    console.log("Visit count:  " + result.visitCount);
 }); 
