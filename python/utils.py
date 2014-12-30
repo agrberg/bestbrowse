@@ -36,18 +36,21 @@ def getTimeDifferences(browser_id=None):
 
 
 def getRedirect(url):
+    """
+    If |url| is a 404, returns None.
+    Else, returns the top-level domain of whatever |url| redirects to.
+    """
     req = urllib2.Request(url)
-    res = urllib2.urlopen(req)
+    try:
+        res = urllib2.urlopen(req)
+    except urllib2.URLError, e:
+        if e.code == 404:
+            return None  # indicates 404
     redirect_url = res.geturl()
     return tld.get_tld(redirect_url)
-    # r = requests.head(url)
-    # return tld.get_tld(r.headers['location'])
 
 
 # For testing
 if __name__ == '__main__':
-    # print getTimeDifferences()
-    # print
-    # print getTimeDifferences('101465226514644436265')
-    # print
     print getRedirect('http://gmail.com')
+    print getRedirect('http://lukecarbis.github.io')
