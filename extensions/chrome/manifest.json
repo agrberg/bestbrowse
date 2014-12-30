@@ -5,12 +5,12 @@
   "description": "records browsing behavior",
   "version": "1.0",
   "background": {
-      "scripts": ["background.js"]
+    "scripts": ["background.js"]
   },
 
   "permissions": [
     "history",
     "http://10.104.92.195/",
-	"identity"
+  	"identity"
   ]
 }
