@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141230112403) do
+ActiveRecord::Schema.define(version: 20141230125450) do
 
   create_table "visits", force: true do |t|
     t.string   "url"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20141230112403) do
     t.string   "email"
     t.string   "browser_type"
     t.string   "browser_id"
+    t.string   "base_url"
   end
 
   add_index "visits", ["browser_type", "browser_id"], name: "index_visits_on_browser_type_and_browser_id"
