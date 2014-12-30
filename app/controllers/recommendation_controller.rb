@@ -1,5 +1,5 @@
 class RecommendationController < ApplicationController
   def index
-    render json: 'Okay'
+    render json: 'http://www.google.com'
   end
 end
