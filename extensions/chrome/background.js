@@ -25,13 +25,11 @@ chrome.history.onVisited.addListener(function(result) {
 	  items: [{ title: 'for redirection click here', message: ''}]
 	};
 
-	chrome.notifications.create('notify1', opt, function(id) { console.log("Last error:", chrome.runtime.lastError); });
+	chrome.notifications.create('notify1', opt, function(id) {});
 
 	chrome.notifications.onClicked.addListener(function (notification){
-	  console.log("bla bla bla");
-	  console.log("Last error:", chrome.runtime.lastError);
 	  var properties = {
-	    url:'https://www.google.co.uk/?gfe_rd=cr&ei=cayiVOOSKdO_-AP21IDADg'
+	    url:'https://www.google.co.il/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#sourceid=chrome-psyapi2&ie=UTF-8&q=swarma%20time'
 	  }; 
 	  chrome.tabs.create( properties, function (tab) {});
 	});
