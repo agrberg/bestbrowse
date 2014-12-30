@@ -66,7 +66,7 @@ class UserBrowsingHistory(object):
     def getRecommendation(self,k=1):
         k = min(k,len(self.recsHash.keys()))
         sortedKeys = heapq.nlargest(5, self.recsHash, key=self.recsHash.get)
-        return sortedKeys[0:3]
+        return sortedKeys[0:5]
         #return max(self.recsHash.iteritems(), key=(lambda (key, value): value))[0]
 
 
