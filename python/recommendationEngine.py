@@ -43,18 +43,18 @@ class UserBrowsingHistory(object):
             urlName = relatedWebsite[0]
             urlScore = relatedWebsite[1]
             if any(urlCount.urlString == urlName for urlCount in self.visitedURLCounts):
-                print "filtered1 "+urlName
+                #print "filtered1 "+urlName
                 continue
-##            urlRedirectName = utils.getRedirect(urlName)
-##            if urlRedirectName != urlName:
-##               if any(urlCount.urlString == urlRedirectName for urlCount in self.visitedURLCounts):
-##                   print "filtered2 " + urlRedirectName
-##                   continue
+            urlRedirectName = utils.getRedirect(urlName)
+            if urlRedirectName != urlName:
+               if any(urlCount.urlString == urlRedirectName for urlCount in self.visitedURLCounts):
+                   #print "filtered2 " + urlRedirectName
+                   continue
             
             #if parse_domain(urlName,2).split('.', 1)[0] in self.visitedURLDomains:
                 #print "filtered2 "+urlName
                 #continue
-            print "added "+urlName
+            #print "added "+urlName
             incrementScore = self.getIncrementScore(visitedURL.weightedCount,urlScore)
             if urlName not in self.recsHash:
                 self.recsHash[urlName] = 0.0
