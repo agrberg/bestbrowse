@@ -45,7 +45,7 @@ class UserBrowsingHistory(object):
             if any(urlCount.urlString == urlName for urlCount in self.visitedURLCounts):
                 #print "filtered1 "+urlName
                 continue
-            urlRedirectName = utils.getRedirect(urlName)
+##            urlRedirectName = utils.getRedirect(urlName)
 ##            if urlRedirectName != urlName:
 ##               if any(urlCount.urlString == urlRedirectName for urlCount in self.visitedURLCounts):
 ##                   print "filtered2 " + urlRedirectName
