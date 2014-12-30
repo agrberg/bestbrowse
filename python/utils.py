@@ -2,6 +2,8 @@ import sqlite3
 import os
 import time
 import math
+import urllib2
+import tld
 
 dbpath = os.path.expanduser('~/Dropbox/ITC_db/best_browse_dev.sqlite3')
 
@@ -32,8 +34,17 @@ def getTimeDifferences(browser_id=None):
     return time_dict.values()
 
 
+def getRedirect(url):
+    req = urllib2.Request(url)
+    res = urllib2.urlopen(req)
+    redirect_url = res.geturl()
+    return tld.get_tld(redirect_url)
+
+
 # For testing
 if __name__ == '__main__':
     print getTimeDifferences()
     print
     print getTimeDifferences('101465226514644436265')
+    print
+    print getRedirect('http://gmail.com')
