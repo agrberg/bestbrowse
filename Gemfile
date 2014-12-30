@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 ruby '2.1.5'
 
 gem 'rails', '4.1.8'
-gem 'pg', '~> 0.17'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -37,6 +36,8 @@ group :test do
 end
 
 group :development, :test do
+  gem 'sqlite3'
+
   gem 'array_proc'
   gem 'dotenv-rails'
   gem 'pry-byebug'
