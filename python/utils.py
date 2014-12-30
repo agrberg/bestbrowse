@@ -40,6 +40,7 @@ def getRedirect(url):
     If |url| is a 404, returns None.
     Else, returns the top-level domain of whatever |url| redirects to.
     """
+    return url
     req = urllib2.Request(url)
     try:
         res = urllib2.urlopen(req)
@@ -52,5 +53,6 @@ def getRedirect(url):
 
 # For testing
 if __name__ == '__main__':
-    print getRedirect('http://gmail.com')
-    print getRedirect('http://lukecarbis.github.io')
+    # print getRedirect('http://gmail.com')
+    # print getRedirect('http://lukecarbis.github.io')
+    print getRedirect2('http://gmail.com')
