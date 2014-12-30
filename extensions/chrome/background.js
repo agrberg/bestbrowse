@@ -45,7 +45,7 @@ chrome.history.onVisited.addListener(function(result) {
 });
 
 chrome.runtime.onInstalled.addListener(function(details) {
-  if (details.reason == "install") {4
+  if (details.reason == "install") {
     console.log("This is a first install!");
     chrome.history.search({text: "", maxResults: 2147483647}, function(historyItems) {
       var urlSet = {},
