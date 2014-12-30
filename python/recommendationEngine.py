@@ -43,7 +43,7 @@ class UserBrowsingHistory(object):
             urlName = relatedWebsite[0]
             urlScore = relatedWebsite[1]
             if any(urlCount.urlString == urlName for urlCount in self.visitedURLCounts):
-                #print "filtered1 "+urlName
+                print "filtered1 "+urlName
                 continue
 ##            urlRedirectName = utils.getRedirect(urlName)
 ##            if urlRedirectName != urlName:
