@@ -49,7 +49,7 @@ class UserBrowsingHistory(object):
         for relatedWebsite in visitedURL.relatedWebsites:
             urlName = relatedWebsite[0]
             urlScore = relatedWebsite[1]
-            shortURLName = self.getParsedDomain(urlName)
+            shortURLName = self.getParsedDomain('http://' + urlName)
             if any(urlString == shortURLName for urlString in self.visitedURLDomains):
                 #print "filtered1 "+urlName
                 continue
