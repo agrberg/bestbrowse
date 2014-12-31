@@ -94,7 +94,7 @@ class URLCount(object):
         count = 0.0
         for timeDiff in timeDifferences:
             # adjustedTimeDiff = timeDiff  # self.getAdjustedTimeDifference(timeDiff)
-            count = count + 0.01 + 1.0 / math.pow(float(timeDiff), DISCOUNT_EXPONENT)
+            count = count + 0.01 + 1.0 / math.pow(float(timeDiff)+2, DISCOUNT_EXPONENT)
         return count
 
     ## @staticmethod
