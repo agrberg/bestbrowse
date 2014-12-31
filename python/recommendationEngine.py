@@ -30,7 +30,10 @@ class UserBrowsingHistory(object):
     #     return utils.getTimeDifferences(self.userID)
 
     def getParsedDomain(self, domain):
-        return parse_domain(domain, 2).split('.', 1)[0]
+        returnthis = parse_domain(domain, 2).split('.', 1)[0]
+        if returnthis == '':
+            returnthis = parse_domain('http://' + domain, 2).split('.', 1)[0]
+        return returnthis
 
     def getVisitedURLCounts(self):
         self.visitedURLDomains = set()
