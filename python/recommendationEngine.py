@@ -112,5 +112,5 @@ def main():
     browser_id = sys.argv[1]
     print UserBrowsingHistory(browser_id).getRecommendation()
 
-##if __name__ == '__main__':
-##    main()
+if __name__ == '__main__':
+    main()
