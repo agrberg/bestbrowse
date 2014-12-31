@@ -1,13 +1,9 @@
 import functools
-import os
-import os.path
 import json
 import pickle
-
-CACHE_DIRECTORY_NAME = "persistent_memoization_cache"
-
-module_directory = os.path.dirname(os.path.join(os.getcwd(), __file__))
-persistent_cache_directory = os.path.join(module_directory, CACHE_DIRECTORY_NAME)
+import inspect
+import os.path
+import persistence
 
 class MemoizedFunction(object):
     def __init__(self, func):
@@ -50,9 +46,7 @@ class PersistentDictionary(object):
 class PersistentlyMemoizedFunction(MemoizedFunction):
     def __init__(self, func):
         super(PersistentlyMemoizedFunction, self).__init__(func)
-        if not os.path.exists(persistent_cache_directory):
-            os.mkdir(persistent_cache_directory)
-        cache_file_name = os.path.join(persistent_cache_directory, "{0}.pickle".format(func.__name__))
+        cache_file_name = os.path.join(persistence.persistent_cache_directory, "{0}.pickle".format(func.__name__))
         self._cache = PersistentDictionary(cache_file_name)
 
 memoized = MemoizedFunction
