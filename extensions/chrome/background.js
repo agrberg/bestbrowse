@@ -26,6 +26,10 @@ var recNoteId = '',
 reqListener = function() {
   var recommendation;
 
+  if (currentTabId === recommendedTabId) {
+    return;
+  }
+
   if (this.responseText != '') {
     recommendation = JSON.parse(this.responseText)[0];
 
@@ -41,10 +45,6 @@ reqListener = function() {
 chrome.history.onVisited.addListener(function(result) {
 	var reqToSend = new XMLHttpRequest(),
 	    fd = new FormData();
-
-	if (currentTabId === recommendedTabId) {
-	  return;
-  }
 
 	fd.append('url', result.url);
 	fd.append('visit_at', result.lastVisitTime);
