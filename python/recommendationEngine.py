@@ -13,7 +13,8 @@ ToDos:
 3) Make flexible number of recommendations
 """
 
-DISCOUNT_EXPONENT = 0.5
+DISCOUNT_EXPONENT = 2
+DENOMINATOR_CORRECTOR = 3
 TOP_X = 10
 #FORBIDDEN_WEBSITES = ['google','facebook','youtube','yahoo','baidu','qq','twitter','wikipedia','amazon','live','linkedin','sina','ebay','blogspot','bing','wordpress','instagram','PayPal','microsoft']
 
@@ -94,7 +95,7 @@ class URLCount(object):
         count = 0.0
         for timeDiff in timeDifferences:
             # adjustedTimeDiff = timeDiff  # self.getAdjustedTimeDifference(timeDiff)
-            count = count + 0.01 + 1.0 / math.pow(float(timeDiff)+2, DISCOUNT_EXPONENT)
+            count = count + 1.0 / math.pow(float(timeDiff)+DENOMINATOR_CORRECTOR, DISCOUNT_EXPONENT)
         return count
 
     ## @staticmethod
