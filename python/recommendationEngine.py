@@ -13,7 +13,7 @@ ToDos:
 3) Make flexible number of recommendations
 """
 
-DISCOUNT_EXPONENT = 0.9
+DISCOUNT_EXPONENT = 0.5
 TOP_X = 10
 #FORBIDDEN_WEBSITES = ['google','facebook','youtube','yahoo','baidu','qq','twitter','wikipedia','amazon','live','linkedin','sina','ebay','blogspot','bing','wordpress','instagram','PayPal','microsoft']
 
@@ -21,10 +21,15 @@ class UserBrowsingHistory(object):
     def __init__(self,userID):
         self.userID = userID
         self.visitedURLsAndTimes = utils.getTimeDifferences(self.userID)  # self.getVisitedURLsAndTimes()
+        self.configureTimes()
         # A list of URLCount objects
         # self.visitedURLCounts = self.getVisitedURLCounts()
         self.visitedURLCounts = sorted(self.getVisitedURLCounts(), key=lambda x: x.weightedCount, reverse=True)[:TOP_X]
         self.fillInRelatedPagesHash()
+
+    def configureTimes(self):
+        for time in self.visitedURLsAndTimes:
+            time[1]=sorted(list(set([sec/60 for sec in time[1]]))[0:10])
 
     # def getVisitedURLsAndTimes(self):
     #     return utils.getTimeDifferences(self.userID)
@@ -67,7 +72,7 @@ class UserBrowsingHistory(object):
             self.recsHash[urlName] += incrementScore
 
     def getIncrementScore(self,visitedWeightedCount,relatedScore):
-        return visitedWeightedCount * relatedScore
+        return 100.00*visitedWeightedCount * relatedScore
 
     def getRecommendation(self):
         ## k = min(k,len(self.recsHash.keys()))
@@ -89,7 +94,7 @@ class URLCount(object):
         count = 0.0
         for timeDiff in timeDifferences:
             # adjustedTimeDiff = timeDiff  # self.getAdjustedTimeDifference(timeDiff)
-            count = count + 1.0 / math.pow(float(timeDiff), DISCOUNT_EXPONENT)
+            count = count + 0.01 + 1.0 / math.pow(float(timeDiff), DISCOUNT_EXPONENT)
         return count
 
     ## @staticmethod
@@ -107,5 +112,5 @@ def main():
     browser_id = sys.argv[1]
     print UserBrowsingHistory(browser_id).getRecommendation()
 
-if __name__ == '__main__':
-    main()
+##if __name__ == '__main__':
+##    main()

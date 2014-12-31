@@ -30,7 +30,7 @@ def getTimeDifferences(browser_id=None):
     url_times = [(str(url), int(access_time)) for url, access_time in db.execute(sql_cmd, sql_params) if url is not None]
     time_dict = {}
     for url, _ in url_times:
-        time_dict[url] = (url, [])
+        time_dict[url] = [url, []]
     for url, access_time in url_times:
         time_dict[url][1].append(curtime - access_time)
     return time_dict.values()
