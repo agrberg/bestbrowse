@@ -13,9 +13,9 @@ chrome.tabs.onActivated.addListener(function(activeInfo) {
 var recNoteId = '',
     opt = {
       type: 'basic',
-      iconUrl: 'icon.jpg',
-      title: 'A wild recommendation has appeared!',
-      message: 'You got a recommendation. Click me brah!',
+      iconUrl: 'icon.png',
+      title: 'NextMe Recommendation',
+      message: "You've got a new recommendation.\nClick here to see it!",
       isClickable: true
     },
     reqListener,

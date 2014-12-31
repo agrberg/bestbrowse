@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "bestbrowse",
-  "description": "records browsing behavior",
+  "name": "NextMe",
+  "description": "Website recommendations based on your personal history.",
   "version": "1.0",
   "background": {
     "scripts": ["background.js"]
@@ -12,7 +12,12 @@
     "history",
   	"identity",
   	"notifications",
-    "http://10.104.92.195/",
-  	"https://www.google.co.il/"
-  ]
+    "http://10.104.92.195/"
+  ],
+
+  "icons": {
+    "128": "logo_128.png",
+    "48": "logo_48.png",
+    "16": "logo_16.png"
+  }
 }
