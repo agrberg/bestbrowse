@@ -13,8 +13,8 @@ ToDos:
 3) Make flexible number of recommendations
 """
 
-DISCOUNT_EXPONENT = 2
-DENOMINATOR_CORRECTOR = 3
+DISCOUNT_EXPONENT = 4
+DENOMINATOR_CORRECTOR = 1
 TOP_X = 10
 #FORBIDDEN_WEBSITES = ['google','facebook','youtube','yahoo','baidu','qq','twitter','wikipedia','amazon','live','linkedin','sina','ebay','blogspot','bing','wordpress','instagram','PayPal','microsoft']
 
@@ -30,7 +30,7 @@ class UserBrowsingHistory(object):
 
     def configureTimes(self):
         for time in self.visitedURLsAndTimes:
-            time[1]=sorted(list(set([sec/60 for sec in time[1]]))[0:10])
+            time[1]=sorted(list(set([sec/15 for sec in time[1]]))[0:10])
 
     # def getVisitedURLsAndTimes(self):
     #     return utils.getTimeDifferences(self.userID)
